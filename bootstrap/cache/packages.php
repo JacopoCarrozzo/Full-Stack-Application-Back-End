@@ -136,6 +136,17 @@
       0 => 'Livewire\\LivewireServiceProvider',
     ),
   ),
+  'maatwebsite/excel' => 
+  array (
+    'aliases' => 
+    array (
+      'Excel' => 'Maatwebsite\\Excel\\Facades\\Excel',
+    ),
+    'providers' => 
+    array (
+      0 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 
@@ -166,6 +177,27 @@
     'providers' => 
     array (
       0 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
+    ),
+  ),
+  'spatie/eloquent-sortable' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\EloquentSortable\\EloquentSortableServiceProvider',
+    ),
+  ),
+  'spatie/laravel-medialibrary' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
+    ),
+  ),
+  'tapp/filament-form-builder' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Tapp\\FilamentFormBuilder\\FilamentFormBuilderServiceProvider',
     ),
   ),
 );

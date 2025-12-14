@@ -18,6 +18,10 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Resources\Pages\PageResource;
+use App\Filament\Resources\Menus\MenuResource;
+use App\Filament\Resources\TeamMembers\TeamMembersResource;
+use App\Filament\Resources\FilamentForms\FilamentFormResource;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -29,17 +33,23 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => '#4D24ED',  
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            
+            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
+            ])
+            ->resources([
+                MenuResource::class,
+                PageResource::class,
+                TeamMembersResource::class,
+                FilamentFormResource::class, 
             ])
             ->middleware([
                 EncryptCookies::class,

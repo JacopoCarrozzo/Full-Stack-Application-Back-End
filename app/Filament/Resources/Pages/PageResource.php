@@ -22,6 +22,8 @@ class PageResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
+    protected static ?string $modelLabel = 'Page'; 
+
     public static function form(Schema $schema): Schema
     {
         return PageForm::configure($schema);

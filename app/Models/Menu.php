@@ -12,9 +12,9 @@ class Menu extends Model
 
     protected $fillable = [
         'name',
+        'slug',
     ];
 
-    // Defines the One-to-Many relationship. A Menu can have many MenuLinks.
     public function links(): HasMany
     {
         return $this->hasMany(MenuLink::class)->orderBy('order');

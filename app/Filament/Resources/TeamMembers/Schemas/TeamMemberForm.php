@@ -22,7 +22,7 @@ class TeamMemberForm
                         ->maxLength(255),
 
                     TextInput::make('role')
-                        ->label('role')
+                        ->label('Role')
                         ->required()
                         ->maxLength(255),
                 ])
@@ -31,17 +31,20 @@ class TeamMemberForm
             Section::make('Biography')
                 ->schema([
                     RichEditor::make('bio')
-                        ->label('Short biography')
+                        ->label('Short Biography')
                         ->columnSpanFull(),
                 ]),
 
             Section::make('Profile Photo')
                 ->schema([
                     FileUpload::make('photo')
-                        ->label('photo')
+                        ->label('Photo')
                         ->image()
+                        ->required()
                         ->imageEditor()
+                        ->disk('public')
                         ->directory('team')
+                        ->visibility('public')
                         ->maxSize(5120)
                 ])
                 ->collapsible(),

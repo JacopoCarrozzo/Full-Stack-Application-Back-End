@@ -23,6 +23,8 @@ class MenuResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $modelLabel = 'Menu'; 
+
     public static function form(Schema $schema): Schema
     {
        //Role: Defines the fields that appear on the Menu creation and editing pages. 

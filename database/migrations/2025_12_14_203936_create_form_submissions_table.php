@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menus', function (Blueprint $table) {
-            $table->id(); 
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
+        Schema::create('form_submissions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('filament_form_id')->constrained()->cascadeOnDelete();
+            $table->json('data'); 
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('form_submissions');
     }
 };

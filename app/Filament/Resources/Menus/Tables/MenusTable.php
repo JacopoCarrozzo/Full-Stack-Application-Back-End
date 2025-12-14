@@ -14,12 +14,22 @@ class MenusTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')->searchable()->sortable(),
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
+
+                // 💡 COLONNA SLUG AGGIUNTA
+                TextColumn::make('slug')
+                    ->label('Codice Identificativo')
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
+                //
             ])
             ->recordActions([
                 EditAction::make(),

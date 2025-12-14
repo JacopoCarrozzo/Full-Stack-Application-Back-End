@@ -19,6 +19,8 @@ class TeamMembersResource extends Resource
 
     protected static ?string $navigationLabel = 'Team Members';
 
+    protected static ?string $modelLabel = 'Team Member'; 
+
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?int $navigationSort = 3;
