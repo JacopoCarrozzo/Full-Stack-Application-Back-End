@@ -27,9 +27,6 @@ class PageForm
             ])
             ->components([
 
-                /* -----------------------------------------------------------------
-                 | MAIN DETAILS
-                 |-----------------------------------------------------------------*/
                 Section::make('Main Details')
                     ->description('Basic page information')
                     ->schema([
@@ -53,9 +50,6 @@ class PageForm
                     ])
                     ->columns(2),
 
-                /* -----------------------------------------------------------------
-                 | CONTENT
-                 |-----------------------------------------------------------------*/
                 Section::make('Content')
                     ->description('Manage page content blocks')
                     ->schema([
@@ -63,7 +57,6 @@ class PageForm
                             ->label('Content Blocks')
                             ->blocks([
 
-                                /* ---------------- HEADER ---------------- */
                                 Block::make('heading')
                                     ->label('Header')
                                     ->icon('heroicon-o-hashtag')
@@ -85,7 +78,6 @@ class PageForm
                                             ->maxLength(255),
                                     ]),
 
-                                /* ---------------- TEXT ---------------- */
                                 Block::make('text')
                                     ->label('Text')
                                     ->icon('heroicon-o-pencil-square')
@@ -95,7 +87,6 @@ class PageForm
                                             ->required(),
                                     ]),
 
-                                /* ---------------- IMAGE ---------------- */
                                 Block::make('image')
                                     ->label('Image')
                                     ->icon('heroicon-o-photo')
@@ -116,7 +107,6 @@ class PageForm
                                             ->maxLength(255),
                                     ]),
 
-                                /* ---------------- TEAM GRID ---------------- */
                                 Block::make('team-grid')
                                     ->label('Team Members')
                                     ->icon('heroicon-o-user-group')
@@ -166,7 +156,6 @@ class PageForm
                                             ),
                                     ]),
 
-                                /* ---------------- CUSTOM FORM ---------------- */
                                 Block::make('custom-form')
                                     ->label('Custom Form')
                                     ->icon('heroicon-o-envelope')
@@ -183,39 +172,38 @@ class PageForm
                                             ->required(),
                                     ]),
 
-                                /* ---------------- SERVICES GRID ---------------- */
                                 Block::make('services-grid')
-    ->label('Griglia Servizi')
-    ->icon('heroicon-o-squares-2x2')
-    ->schema([
-        TextInput::make('title')
-            ->label('Titolo della sezione')
-            ->default('I nostri servizi')
-            ->columnSpanFull(),
+                                    ->label('Services Grid')
+                                    ->icon('heroicon-o-code-bracket')
+                                    ->schema([
+                                        TextInput::make('title')
+                                            ->label('Section Title')
+                                            ->default('Our services')
+                                            ->columnSpanFull(),
 
-        Repeater::make('items')
-            ->label('Services')
-            ->schema([
-                Select::make('service_id')
-                    ->label('Service')
-                    ->options(
-                        \App\Models\Service::where('is_published', true)
-                            ->orderBy('sort_order')
-                            ->pluck('title', 'id')
-                    )
-                    ->searchable()
-                    ->preload()
-                    ->required(),
-            ])
-            ->columns(2)
-            ->reorderable()
-            ->collapsible()
-            ->itemLabel(fn (array $state): ?string => 
-                \App\Models\Service::find($state['service_id'])?->title ?? null
-            )
-            ->defaultItems(3)
-            ->columnSpanFull(),
-    ]),
+                                        Repeater::make('items')
+                                            ->label('Services')
+                                            ->schema([
+                                                Select::make('service_id')
+                                                    ->label('Service')
+                                                    ->options(
+                                                        \App\Models\Service::where('is_published', true)
+                                                            ->orderBy('sort_order')
+                                                            ->pluck('title', 'id')
+                                                    )
+                                                    ->searchable()
+                                                    ->preload()
+                                                    ->required(),
+                                            ])
+                                            ->columns(2)
+                                            ->reorderable()
+                                            ->collapsible()
+                                            ->itemLabel(fn (array $state): ?string => 
+                                                \App\Models\Service::find($state['service_id'])?->title ?? null
+                                            )
+                                            ->defaultItems(3)
+                                            ->columnSpanFull(),
+                                    ]),
                             ])
                             ->collapsible(),
                     ]),
