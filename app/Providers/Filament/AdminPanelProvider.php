@@ -21,7 +21,8 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Resources\Pages\PageResource;
 use App\Filament\Resources\Menus\MenuResource;
 use App\Filament\Resources\TeamMembers\TeamMembersResource;
-use App\Filament\Resources\FilamentForms\FilamentFormResource;
+use App\Filament\Resources\FilamentForms\FilamentFormResource; 
+use App\Filament\Resources\Services\ServiceResource;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -50,6 +51,7 @@ class AdminPanelProvider extends PanelProvider
                 PageResource::class,
                 TeamMembersResource::class,
                 FilamentFormResource::class, 
+                ServiceResource::class,
             ])
             ->middleware([
                 EncryptCookies::class,

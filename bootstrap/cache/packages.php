@@ -20,6 +20,17 @@
       0 => 'BladeUI\\Icons\\BladeIconsServiceProvider',
     ),
   ),
+  'codewithdennis/filament-lucide-icons' => 
+  array (
+    'aliases' => 
+    array (
+      'FilamentLucideIcons' => 'CodeWithDennis\\FilamentLucideIcons\\Facades\\FilamentLucideIcons',
+    ),
+    'providers' => 
+    array (
+      0 => 'CodeWithDennis\\FilamentLucideIcons\\FilamentLucideIconsServiceProvider',
+    ),
+  ),
   'filament/actions' => 
   array (
     'providers' => 
@@ -168,6 +179,15 @@
       0 => 'Termwind\\Laravel\\TermwindServiceProvider',
     ),
   ),
+  'psyao/filament-icon-picker' => 
+  array (
+    'aliases' => 
+    array (
+    ),
+    'providers' => 
+    array (
+    ),
+  ),
   'ryangjchandler/blade-capture-directive' => 
   array (
     'aliases' => 
@@ -198,6 +218,13 @@
     'providers' => 
     array (
       0 => 'Tapp\\FilamentFormBuilder\\FilamentFormBuilderServiceProvider',
+    ),
+  ),
+  'technikermathe/blade-lucide-icons' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Technikermathe\\LucideIcons\\BladeLucideIconsServiceProvider',
     ),
   ),
 );

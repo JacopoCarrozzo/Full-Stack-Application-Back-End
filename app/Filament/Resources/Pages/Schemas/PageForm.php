@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
-use Closure;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\FileUpload;
@@ -27,6 +26,10 @@ class PageForm
                 'is_published' => false,
             ])
             ->components([
+
+                /* -----------------------------------------------------------------
+                 | MAIN DETAILS
+                 |-----------------------------------------------------------------*/
                 Section::make('Main Details')
                     ->description('Basic page information')
                     ->schema([
@@ -46,16 +49,21 @@ class PageForm
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
-                            ->helperText('The slug is automatically generated from the title and updated only if empty (on blur).'),
+                            ->helperText('Generated from the title if empty.'),
                     ])
                     ->columns(2),
 
+                /* -----------------------------------------------------------------
+                 | CONTENT
+                 |-----------------------------------------------------------------*/
                 Section::make('Content')
                     ->description('Manage page content blocks')
                     ->schema([
                         Builder::make('content')
                             ->label('Content Blocks')
                             ->blocks([
+
+                                /* ---------------- HEADER ---------------- */
                                 Block::make('heading')
                                     ->label('Header')
                                     ->icon('heroicon-o-hashtag')
@@ -76,6 +84,8 @@ class PageForm
                                             ->required()
                                             ->maxLength(255),
                                     ]),
+
+                                /* ---------------- TEXT ---------------- */
                                 Block::make('text')
                                     ->label('Text')
                                     ->icon('heroicon-o-pencil-square')
@@ -85,6 +95,7 @@ class PageForm
                                             ->required(),
                                     ]),
 
+                                /* ---------------- IMAGE ---------------- */
                                 Block::make('image')
                                     ->label('Image')
                                     ->icon('heroicon-o-photo')
@@ -92,12 +103,12 @@ class PageForm
                                         FileUpload::make('url')
                                             ->label('Upload Image')
                                             ->image()
-                                            ->required()
                                             ->disk('public')
-                                            ->directory('page-images'),
+                                            ->directory('page-images')
+                                            ->required(),
 
                                         TextInput::make('alt')
-                                            ->label('Alternative Text (ALT)')
+                                            ->label('ALT text')
                                             ->maxLength(255),
 
                                         TextInput::make('caption')
@@ -105,6 +116,7 @@ class PageForm
                                             ->maxLength(255),
                                     ]),
 
+                                /* ---------------- TEAM GRID ---------------- */
                                 Block::make('team-grid')
                                     ->label('Team Members')
                                     ->icon('heroicon-o-user-group')
@@ -112,13 +124,12 @@ class PageForm
                                         TextInput::make('title')
                                             ->label('Section Title')
                                             ->default('Meet the Team')
-                                            ->maxLength(255)
                                             ->columnSpanFull(),
 
                                         Section::make('Grid Options')
                                             ->schema([
                                                 Select::make('columns')
-                                                    ->label('Number of Columns')
+                                                    ->label('Columns')
                                                     ->options([
                                                         '2' => '2 columns',
                                                         '3' => '3 columns',
@@ -128,13 +139,13 @@ class PageForm
                                                     ->required(),
 
                                                 Toggle::make('show_bio')
-                                                    ->label('Show Biography')
+                                                    ->label('Show biography')
                                                     ->default(true),
                                             ])
                                             ->columns(2),
 
                                         Repeater::make('members')
-                                            ->label('Select Team Members')
+                                            ->label('Team Members')
                                             ->schema([
                                                 Select::make('team_member_id')
                                                     ->label('Member')
@@ -148,21 +159,20 @@ class PageForm
                                                     ->preload()
                                                     ->required(),
                                             ])
-                                            ->columns(3)
                                             ->reorderable()
                                             ->collapsible()
-                                            ->itemLabel(fn (array $state): ?string =>
-                                                \App\Models\TeamMember::find($state['team_member_id'])?->name ?? null
+                                            ->itemLabel(fn (array $state) =>
+                                                \App\Models\TeamMember::find($state['team_member_id'])?->name
                                             ),
                                     ]),
 
+                                /* ---------------- CUSTOM FORM ---------------- */
                                 Block::make('custom-form')
                                     ->label('Custom Form')
                                     ->icon('heroicon-o-envelope')
                                     ->schema([
                                         TextInput::make('title')
                                             ->label('Title Above Form')
-                                            ->placeholder('Ex. "Contact Us", "Subscribe to newsletter"')
                                             ->default('Contact Us')
                                             ->columnSpanFull(),
 
@@ -172,6 +182,40 @@ class PageForm
                                             ->searchable()
                                             ->required(),
                                     ]),
+
+                                /* ---------------- SERVICES GRID ---------------- */
+                                Block::make('services-grid')
+    ->label('Griglia Servizi')
+    ->icon('heroicon-o-squares-2x2')
+    ->schema([
+        TextInput::make('title')
+            ->label('Titolo della sezione')
+            ->default('I nostri servizi')
+            ->columnSpanFull(),
+
+        Repeater::make('items')
+            ->label('Services')
+            ->schema([
+                Select::make('service_id')
+                    ->label('Service')
+                    ->options(
+                        \App\Models\Service::where('is_published', true)
+                            ->orderBy('sort_order')
+                            ->pluck('title', 'id')
+                    )
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+            ])
+            ->columns(2)
+            ->reorderable()
+            ->collapsible()
+            ->itemLabel(fn (array $state): ?string => 
+                \App\Models\Service::find($state['service_id'])?->title ?? null
+            )
+            ->defaultItems(3)
+            ->columnSpanFull(),
+    ]),
                             ])
                             ->collapsible(),
                     ]),
@@ -182,8 +226,7 @@ class PageForm
                         Toggle::make('is_published')
                             ->label('Published')
                             ->default(false),
-                    ])
-                    ->columns(1),
+                    ]),
             ]);
     }
 }

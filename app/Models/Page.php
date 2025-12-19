@@ -18,16 +18,13 @@ class Page extends Model
         'published_at',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
-        'content' => 'array', 
-        'is_published' => 'boolean', 
-        'published_at' => 'datetime',
-    ];
+    'content' => 'array', 
+    'is_published' => 'boolean', 
+    'published_at' => 'datetime',
+    'created_at' => 'datetime',
+    'updated_at' => 'datetime',
+];
 
     public function menuLinks(): HasMany
     {

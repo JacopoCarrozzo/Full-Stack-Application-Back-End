@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\PageController;
 use Tapp\FilamentFormBuilder\Models\Form;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Api\FormController;
-
+use App\Http\Controllers\Api\ServiceController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,3 +32,5 @@ Route::get('team-members', function () {
 Route::get('/forms/{id}', [FormController::class, 'show']);
 
 Route::post('/forms/{id}/submit', [FormController::class, 'submit']);
+
+Route::get('/services', [ServiceController::class, 'index']);
