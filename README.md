@@ -1,4 +1,4 @@
-# 🚀 Threls Full-Stack Application: Laravel Backend
+# 🚀 Full-Stack Application: Laravel Backend
 
 This repository contains the **Laravel** backend. It utilizes **Filament** for the admin interface and exposes data via a **JSON API** for consumption by the Next.js frontend.
 
@@ -24,8 +24,8 @@ Follow these steps in order to configure and launch the application.
 
 | Action | Command to Execute | Description |
 | :--- | :--- | :--- |
-| **1. Clone the Repository** | `git clone https://github.com/JacopoCarrozzo/Threls-Full-Stack-Application` | Downloads the code. |
-| **2. Navigate to Directory** | `cd Threls-Full-Stack-Application` | |
+| **1. Clone the Repository** | `git clone https://github.com/JacopoCarrozzo/Full-Stack-Application-Back-End` | Downloads the code. |
+| **2. Navigate to Directory** | `cd Full-Stack-Application-Back-End` | |
 | **3. Configure .env File** | `copy .env.example .env` | Creates the local configuration file. |
 
 ### Phase 2: Installing Dependencies and Generating Key
@@ -71,7 +71,7 @@ Once the server is started:
 
 ### 1. Administration Interface (Filament CMS)
 
-* **URL:** `http://threls-full-stack-application.test/admin`)
+* **URL:** `https://github.com/JacopoCarrozzo/Full-Stack-Application-Back-End`)
 * **User Setup:** If you don't have an admin user yet, create one:
     ```bash
     php artisan make:filament-user
@@ -81,7 +81,7 @@ Once the server is started:
 
 * **Menu Endpoint:** The API to retrieve the complete menu structure (including linked pages via Eager Loading):
     ```
-    http://threls-full-stack-application.test/api/menus
+    https://github.com/JacopoCarrozzo/Full-Stack-Application-Back-End/api/menus
     ```
 
 The project is now ready to be used as a data source for the Next.js frontend.
